@@ -10,33 +10,31 @@ const AuthenticationGuard = ({ children }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  // TOKEN GET FROM LOCAL STORAGE
+  // Token from localStorage
   const token = localStorage.getItem("token");
-  // check redux auth reducer is  initialization
-  if (auth.isInitialized !== undefined && !auth.isInitialized) {
-    return <LoadingSpinner />;
-  }
 
-  // Ensure auth state is initialized before proceeding
-  // useEffect(() => {
-  if (token) {
-    dispatch(setToken({ token })); // Set token in Redux store
-  }
+  // If auth state isn't initialized, show loading spinner
+  // if (auth.isInitialized === false || auth.isInitialized === undefined) {
+  //   return <LoadingSpinner />;
+  // }
 
-  if (auth.isInitialized === false) {
-    return; // Return early if authentication state is not initialized
-  }
+  // UseEffect to handle token setting and redirection logic
+  useEffect(() => {
+    if (token && !auth.token) {
+      // Set token in Redux store if not already set
+      dispatch(setToken({ token }));
+    }
 
-  if (!token) {
-    // Redirect to login page if token doesn't exist
-    navigate("/auth/login", {
-      state: {
-        from: location.pathname,
-      },
-      replace: true,
-    });
-  }
-  // }, [auth.isInitialized, token, dispatch, navigate, location, auth]);
+    if (auth.isInitialized === false || !token) {
+      // Redirect to login page if token is not found or auth state isn't initialized
+      navigate("/auth/login", {
+        state: {
+          from: location.pathname,
+        },
+        replace: true,
+      });
+    }
+  }, [token, auth, dispatch, navigate, location]);
 
   return children;
 };
