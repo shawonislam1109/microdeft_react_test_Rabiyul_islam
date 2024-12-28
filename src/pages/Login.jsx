@@ -40,7 +40,7 @@ const LoginPage = () => {
     <div className="flex items-center justify-center min-h-screen w-full bg-gray-100">
       <div className="flex flex-row items-center bg-white shadow-lg rounded-lg w-full max-w-4xl p-8">
         {/* Left Section - Icon */}
-        <div className="flex flex-col items-center justify-center bg-blue-500 text-white w-1/3 p-6 rounded-l-lg">
+        <div className="hidden lg:flex flex-col items-center justify-center bg-blue-500 text-white w-1/3 p-6 rounded-l-lg">
           <div className="flex justify-center items-center w-20 h-20 bg-blue-600 rounded-full">
             <FiUser className="text-white text-4xl" />
           </div>
@@ -51,7 +51,7 @@ const LoginPage = () => {
         </div>
 
         {/* Right Section - Form */}
-        <div className="flex flex-col justify-center w-2/3 p-8">
+        <div className="flex flex-col justify-center w-full lg:w-2/3 p-8">
           <h3 className="text-xl font-semibold text-gray-700 text-center mb-6">
             Login
           </h3>

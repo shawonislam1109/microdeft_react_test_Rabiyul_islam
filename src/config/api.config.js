@@ -7,9 +7,10 @@ export const api = createApi({
     mode: "cors",
 
     prepareHeaders(headers, { getState }) {
-      const token = getState().auth.token;
+      // const token = getState().auth.token;
+      console.log("agetfdf", getState().auth);
+      const token = localStorage.getItem("token");
       if (token) headers.set("Authorization", "Bearer " + token);
-      headers.set("device", "WEB");
       return headers;
     },
   }),

@@ -4,6 +4,7 @@ const initialState = {
   user: {},
   token: null,
   isLogging: false,
+  page: 1,
 };
 
 const authSlice = createSlice({
@@ -22,8 +23,12 @@ const authSlice = createSlice({
       state.user = {};
       localStorage.clear();
     },
+
+    setPage(state, { payload }) {
+      state.page = payload;
+    },
   },
 });
 
-export const { setToken, logout } = authSlice.actions;
+export const { setToken, logout, setPage } = authSlice.actions;
 export default authSlice.reducer;

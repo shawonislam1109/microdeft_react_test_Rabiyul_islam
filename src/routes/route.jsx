@@ -13,11 +13,9 @@ const router = createBrowserRouter([
       </AuthenticationGuard>
     ),
     children: [
-      {
-        ...privateRoutes.map((route) => ({
-          ...route,
-        })),
-      },
+      ...privateRoutes.map((route) => ({
+        ...route,
+      })),
     ],
   },
   ...publicRoutes,

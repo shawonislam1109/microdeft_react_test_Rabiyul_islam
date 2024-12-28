@@ -4,7 +4,8 @@ import { GiHamburgerMenu } from "react-icons/gi"; // Hamburger Menu Icon
 import { MdClose } from "react-icons/md"; // Close Icon
 import { useDispatch } from "react-redux";
 import { logout } from "../store/reducer/auth.reducer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { api } from "../config/api.config";
 
 const Header = () => {
   // menu responsive
@@ -22,6 +23,7 @@ const Header = () => {
   // handle logout handler
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(api.util.resetApiState());
     navigate("/auth/login");
     // Add your logout logic here (e.g., clear session, redirect to login page)
   };
@@ -30,22 +32,19 @@ const Header = () => {
     <header className="bg-blue-500 p-4 shadow-md">
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <div className="text-white text-2xl font-semibold">MyApp</div>
+        <Link to={"/"} className="text-white text-2xl font-semibold">
+          Course
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
-          <a href="#home" className="text-white hover:text-gray-200">
-            Home
-          </a>
-          <a href="#about" className="text-white hover:text-gray-200">
-            About
-          </a>
-          <a href="#services" className="text-white hover:text-gray-200">
-            Services
-          </a>
-          <a href="#contact" className="text-white hover:text-gray-200">
-            Contact
-          </a>
+          <Link
+            to={"/course/add"}
+            href="#home"
+            className="text-white hover:text-gray-200"
+          >
+            Add course
+          </Link>
         </nav>
 
         {/* Logout Icon */}
@@ -65,18 +64,10 @@ const Header = () => {
       {/* Mobile Navigation (Hamburger Menu) */}
       {isMenuOpen && (
         <nav className="md:hidden bg-blue-600 p-4 space-y-4">
-          <a href="#home" className="text-white block">
-            Home
-          </a>
-          <a href="#about" className="text-white block">
-            About
-          </a>
-          <a href="#services" className="text-white block">
-            Services
-          </a>
-          <a href="#contact" className="text-white block">
-            Contact
-          </a>
+          <Link href="#home" className="text-white block">
+            Add Course
+          </Link>
+
           <button
             onClick={handleLogout}
             className="text-white block w-full text-left"
