@@ -14,7 +14,6 @@ export const authApi = api.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           localStorage.setItem("token", data?.data?.token);
-          dispatch(api.util.resetApiState());
           navigate("/");
         } catch (error) {
           console.log("login error", error);
